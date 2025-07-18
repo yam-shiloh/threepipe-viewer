@@ -100,39 +100,16 @@ import {
        }
    
        try {
-           // Remove the current model if it exists
-           if (currentModelObject) {
-               console.log('Removing previous model...');
-               viewer.scene.remove(currentModelObject);
-               
-               // Dispose of geometries and materials to free memory
-               currentModelObject.traverse((child) => {
-                   if (child.geometry) {
-                       child.geometry.dispose();
-                   }
-                   if (child.material) {
-                       if (Array.isArray(child.material)) {
-                           child.material.forEach(material => material.dispose());
-                       } else {
-                           child.material.dispose();
-                       }
-                   }
-               });
-               
-               currentModelObject = null;
-           }
-   
-           // Load new model and store reference
+           // Load new model with clearSceneObjects to remove previous models
            console.log('Loading new model:', modelType);
            const result = await viewer.load(modelUrl, {
                autoCenter: true,
-               autoScale: true
+               autoScale: true,
+               clearSceneObjects: true
            });
    
            // Store reference to the loaded model
-           // The loaded model is typically the last child added to the scene
-           const sceneChildren = viewer.scene.children;
-           currentModelObject = sceneChildren[sceneChildren.length - 1];
+           currentModelObject = result;
    
            currentModel = modelType;
            console.log('Successfully loaded model:', modelType);
@@ -147,39 +124,16 @@ import {
    
    async function loadModelByUrl(modelUrl, style) {
        try {
-           // Remove the current model if it exists
-           if (currentModelObject) {
-               console.log('Removing previous model...');
-               viewer.scene.remove(currentModelObject);
-               
-               // Dispose of geometries and materials to free memory
-               currentModelObject.traverse((child) => {
-                   if (child.geometry) {
-                       child.geometry.dispose();
-                   }
-                   if (child.material) {
-                       if (Array.isArray(child.material)) {
-                           child.material.forEach(material => material.dispose());
-                       } else {
-                           child.material.dispose();
-                       }
-                   }
-               });
-               
-               currentModelObject = null;
-           }
-   
-           // Load new model and store reference
+           // Load new model with clearSceneObjects to remove previous models
            console.log('Loading new model by URL:', modelUrl);
            const result = await viewer.load(modelUrl, {
                autoCenter: true,
-               autoScale: true
+               autoScale: true,
+               clearSceneObjects: true
            });
    
            // Store reference to the loaded model
-           // The loaded model is typically the last child added to the scene
-           const sceneChildren = viewer.scene.children;
-           currentModelObject = sceneChildren[sceneChildren.length - 1];
+           currentModelObject = result;
    
            currentModel = style;
            console.log('Successfully loaded model by URL:', modelUrl, 'Style:', style);
