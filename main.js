@@ -70,7 +70,7 @@ import {
     controls.enablePan = false;
   
     // Set canvas size in pixels and layout
-viewer.setRenderSize({ width: 2400, height: 4000 }, 'contain', 1);
+viewer.setRenderSize({ width: 1200, height: 2000 }, 'contain', 1);
 viewer.container.style.position = 'relative';
 viewer.canvas.style.position = 'absolute';
 viewer.canvas.style.top = '50%';
