@@ -1,6 +1,5 @@
 import {
     ThreeViewer,
-   LoadingScreenPlugin,
    BaseGroundPlugin,
    PickingPlugin,
    ProgressivePlugin,
@@ -36,7 +35,6 @@ import {
                }
            },
            plugins: [
-               LoadingScreenPlugin,
                PickingPlugin,
                ProgressivePlugin,
                BaseGroundPlugin,
@@ -67,17 +65,7 @@ import {
        tonemap.exposure = 1.0; // adjust if scene too dark/light
    
        // Configure the loading screen plugin
-       const loadingScreen = viewer.getPlugin(LoadingScreenPlugin);
-       if (loadingScreen) {
-           // Hide all default text and UI elements
-           loadingScreen.loadingTextHeader = '';
-           loadingScreen.errorTextHeader = '';
-           loadingScreen.showFileNames = false;
-           loadingScreen.showProcessStates = false;
-           loadingScreen.showProgress = false;
-           loadingScreen.backgroundOpacity = 0.95;
-           loadingScreen.backgroundBlur = 0;
-       }
+       
    
        // Load initial model (loving)
        await loadModel('loving');
