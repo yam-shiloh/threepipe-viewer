@@ -16,7 +16,7 @@ import {
     const viewer = new ThreeViewer({
       canvas: document.getElementById('webgi-canvas'),
       msaa: false,
-      debug: true,
+      debug: false, // ✅ Disable FPS/debug UI
       renderScale: 'auto',
       dropzone: {
         allowedExtensions: ['gltf', 'glb', 'hdr', 'bin', 'png', 'jpeg', 'webp', 'jpg', 'exr', 'json'],
@@ -41,14 +41,27 @@ import {
     viewer.getPlugin(ThreeGpuPathTracerPlugin).enabled = false;
     viewer.getPlugin(BaseGroundPlugin).enabled = false;
   
-    // Set white background
-    viewer.renderManager.renderer.setClearColor(0xffffff, 1);
+    // ✅ Transparent canvas background
+    viewer.renderManager.renderer.setClearColor(0x000000, 0); // fully transparent
+    viewer.renderManager.renderer.setClearAlpha(0);
+    viewer.canvas.style.background = 'transparent';
   
-    // Set environment map
+    // ✅ HTML container should have background color (CSS or inline style)
+    // For example:
+    // <div id="viewer-container" style="background: white;">
+    //   <canvas id="webgi-canvas"></canvas>
+    // </div>
+  
+    // ✅ Set HDR environment without making it the visible background
     await viewer.setEnvironmentMap(
       'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/brown_photostudio_02_1k.hdr',
       { setBackground: false }
     );
+  
+    // ✅ Keep tone mapping enabled but optional tweaks:
+    const tonemap = viewer.getPlugin(TonemapPlugin);
+    tonemap.toneMapping = 1; // 1 = LinearToneMapping (or 0 = NoToneMapping)
+    tonemap.exposure = 1.0;  // adjust if scene too dark/light
   
     // Load the 3D model
     await viewer.load(
@@ -70,13 +83,13 @@ import {
     controls.enablePan = false;
   
     // Set canvas size in pixels and layout
-viewer.setRenderSize({ width: 2000, height: 1000 }, 'contain', 1);
-viewer.container.style.position = 'relative';
-viewer.canvas.style.position = 'absolute';
-viewer.canvas.style.top = '50%';
-viewer.canvas.style.left = '50%';
-viewer.canvas.style.transform = 'translate(-50%, -50%)';
-
+    viewer.setRenderSize({ width: 2000, height: 1000 }, 'contain', 1);
+    viewer.container.style.position = 'relative';
+    viewer.canvas.style.position = 'absolute';
+    viewer.canvas.style.top = '50%';
+    viewer.canvas.style.left = '50%';
+    viewer.canvas.style.transform = 'translate(-50%, -50%)';
+  
     // Enable auto-rotate
     controls.autoRotate = true;
     controls.autoRotateSpeed = 1.5;
@@ -95,7 +108,7 @@ viewer.canvas.style.transform = 'translate(-50%, -50%)';
   
     // === FIXED CAMERA POSITION & UPDATED TARGET ===
     cam.position.set(-0.1, 0, 1.2);
-    controls.target.set(0, -1.2, 0); // target is now 1 unit below origin
+    controls.target.set(0, -1.2, 0);
     controls.update();
   }
   
