@@ -66,7 +66,7 @@ import {
        tonemap.toneMapping = 1; // 1 = LinearToneMapping (or 0 = NoToneMapping)
        tonemap.exposure = 1.0; // adjust if scene too dark/light
    
-       // Setup custom loading screen
+       // Configure the loading screen plugin
        const loadingScreen = viewer.getPlugin(LoadingScreenPlugin);
        if (loadingScreen) {
            // Hide all default text and UI elements
