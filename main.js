@@ -70,7 +70,7 @@ import {
     controls.enablePan = false;
   
     // Set canvas size in pixels and layout
-viewer.setRenderSize({ width: 1200, height: 2000 }, 'contain', 1);
+viewer.setRenderSize({ width: 2000, height: 1000 }, 'contain', 1);
 viewer.container.style.position = 'relative';
 viewer.canvas.style.position = 'absolute';
 viewer.canvas.style.top = '50%';
@@ -94,8 +94,8 @@ viewer.canvas.style.transform = 'translate(-50%, -50%)';
     controls.addEventListener('start', resetAutoRotate);
   
     // === FIXED CAMERA POSITION & UPDATED TARGET ===
-    cam.position.set(-2.7724068312354144, 0, 4.16098069715773);
-    controls.target.set(0, -1, 0); // target is now 1 unit below origin
+    cam.position.set(-0.1, 0, 1.2);
+    controls.target.set(0, -1.2, 0); // target is now 1 unit below origin
     controls.update();
   }
   
