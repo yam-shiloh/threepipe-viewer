@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Threepipe ImportMap Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ✅ Import Map -->
+    <script type="importmap">
+        {
+          "imports": {
+            "threepipe": "https://unpkg.com/threepipe@latest/dist/index.mjs",
+            "@threepipe/plugin-path-tracing": "https://unpkg.com/@threepipe/plugin-path-tracing@latest/dist/index.mjs",
+            "@threepipe/plugin-tweakpane": "https://unpkg.com/@threepipe/plugin-tweakpane@latest/dist/index.mjs"
+          }
+        }
+        </script>
+        
+  </head>
+  <body style="margin: 0; overflow: hidden;">
+    <div id="webgi-canvas-container" style="width: 100vw; height: 100vh;">
+      <canvas id="webgi-canvas" style="width: 100%; height: 100%;"></canvas>
+    </div>
+
+    <!-- ✅ Load main.js as a module -->
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
