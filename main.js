@@ -99,10 +99,7 @@ import {
        }
    
        try {
-           // Clear existing scene
-           viewer.scene.clearObjects();
-   
-           // Load new model
+           // Instead of clearing, just load the new model - ThreePipe will handle replacement
            await viewer.load(modelUrl, {
                autoCenter: true,
                autoScale: true
@@ -121,10 +118,7 @@ import {
    
    async function loadModelByUrl(modelUrl, style) {
        try {
-           // Clear existing scene
-           viewer.scene.clearObjects();
-   
-           // Load new model
+           // Instead of clearing, just load the new model - ThreePipe will handle replacement
            await viewer.load(modelUrl, {
                autoCenter: true,
                autoScale: true
